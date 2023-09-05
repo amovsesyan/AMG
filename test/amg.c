@@ -1,3 +1,6 @@
+// updating to collect hpct data from just main loop
+#include <hpctoolkit.h>
+
 /*BHEADER**********************************************************************
  * Copyright (c) 2017,  Lawrence Livermore National Security, LLC.
  * Produced at the Lawrence Livermore National Laboratory.
@@ -56,6 +59,7 @@ hypre_int
 main( hypre_int argc,
       char *argv[] )
 {
+   hpctoolkit_sampling_stop();
    HYPRE_Int           arg_index;
    HYPRE_Int           print_usage;
    HYPRE_Int           build_rhs_type;

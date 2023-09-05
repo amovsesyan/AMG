@@ -19,7 +19,13 @@
 #
 #EHEADER**********************************************************************
 
+# for HPCToolkit linking
+ifndef HPCT_ROOT
+    $(error HPCT_ROOT is not set)
+endif
 
+HPCT_I = -I ${HPCT_ROOT}/include
+HPCT_L = -L ${HPCT_ROOT}/lib/hpctoolkit -lhpctoolkit
 
 # set the compiler here
 #CC = gcc
@@ -43,11 +49,11 @@ CC = mpicc
 #INCLUDE_CFLAGS = -g -DTIMER_USE_MPI 
 #INCLUDE_CFLAGS = -g -DTIMER_USE_MPI -DHYPRE_USING_OPENMP
 #INCLUDE_CFLAGS = -O2 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -DHYPRE_BIGINT -fopenmp
-INCLUDE_CFLAGS = -O2 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -fopenmp -DHYPRE_HOPSCOTCH -DHYPRE_USING_PERSISTENT_COMM -DHYPRE_BIGINT
+INCLUDE_CFLAGS = -O2 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -fopenmp -DHYPRE_HOPSCOTCH -DHYPRE_USING_PERSISTENT_COMM -DHYPRE_BIGINT ${HPCT_I}
 #INCLUDE_CFLAGS = -O2 -DTIMER_USE_MPI -DHYPRE_USING_OPENMP -qsmp=omp -qmaxmem=-1 -DHYPRE_HOPSCOTCH -DHYPRE_USING_PERSISTENT_COMM -DHYPRE_BIGINT
 
 # set link flags here
 #INCLUDE_LFLAGS = -lm -qsmp=omp
-INCLUDE_LFLAGS = -lm -fopenmp
+INCLUDE_LFLAGS = -lm -fopenmp ${HPCT_L}
 #INCLUDE_LFLAGS = -lm 
 
