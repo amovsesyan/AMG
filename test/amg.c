@@ -290,7 +290,8 @@ main( hypre_int argc,
 
    time_index = hypre_InitializeTiming("RHS and Initial Guess");
    hypre_BeginTiming(time_index);
-
+   // we start sampling when the timing begins
+   hpctoolkit_sampling_start();
    ierr = HYPRE_ParCSRMatrixGetLocalRange( parcsr_A,
                                               &first_local_row, &last_local_row ,
                                               &first_local_col, &last_local_col );
@@ -575,6 +576,8 @@ main( hypre_int argc,
    }
  
 
+   // end timing after computation
+   hpctoolkit_sampling_stop();
    /*-----------------------------------------------------------
     * Print the solution
     *-----------------------------------------------------------*/
